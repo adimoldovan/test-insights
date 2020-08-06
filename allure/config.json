@@ -1,0 +1,6 @@
+{
+  "ignore": [
+    "com.pck.ignore.TestClass",
+    "testMethodNameToIgnore"
+  ]
+}
