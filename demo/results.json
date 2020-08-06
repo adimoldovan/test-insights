@@ -1,0 +1,437 @@
+{
+  "com.pck.test.TestClass1.test1": {
+    "failure_rate": 75,
+    "results": [
+      {
+        "start": 1580325560525,
+        "status": "passed",
+        "stop": 1580325570902,
+        "trace": null,
+        "uuid": "74176e14-6077-4cbb-953f-ae95318d373a"
+      },
+      {
+        "start": 1580345021868,
+        "status": "passed",
+        "stop": 1580345032098,
+        "trace": null,
+        "uuid": "d5d2dd29-184f-4059-93d4-bb0a9b4fb0a1"
+      },
+      {
+        "start": 1580499790874,
+        "status": "failed",
+        "stop": 1580499801526,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "a5442504-4622-4082-b6a9-0583ec65f030"
+      },
+      {
+        "start": 1580517914449,
+        "status": "passed",
+        "stop": 1580517924663,
+        "trace": null,
+        "uuid": "c16d8631-e404-40d0-9cd9-f2d731bca1a8"
+      },
+      {
+        "start": 1580604217498,
+        "status": "failed",
+        "stop": 1580604228214,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "390196b5-2c59-48ce-bc0a-b9afd742d6d7"
+      },
+      {
+        "start": 1580690655106,
+        "status": "failed",
+        "stop": 1580690665737,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "99240719-a3bf-4785-a02b-99c8a047727a"
+      },
+      {
+        "start": 1580777130364,
+        "status": "failed",
+        "stop": 1580777141030,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "b7f4a8c2-d897-4854-adad-9458a8d39401"
+      },
+      {
+        "start": 1580833615423,
+        "status": "failed",
+        "stop": 1580833626527,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "06c4a855-7ef1-486b-8c1a-7751086e174e"
+      },
+      {
+        "start": 1580949800245,
+        "status": "passed",
+        "stop": 1580949810845,
+        "trace": null,
+        "uuid": "27d8d4f6-6b16-42b8-8833-8a117b6136ad"
+      },
+      {
+        "start": 1581036418144,
+        "status": "passed",
+        "stop": 1581036428491,
+        "trace": null,
+        "uuid": "e2e61890-15de-479f-a157-e97dbae74899"
+      },
+      {
+        "start": 1581123117304,
+        "status": "failed",
+        "stop": 1581123128008,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "c63fc78f-5cfb-4f8d-8bf4-e5d984d542e9"
+      },
+      {
+        "start": 1581209355726,
+        "status": "failed",
+        "stop": 1581209366375,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "06af0721-9da3-4dee-b72a-b2957fcdf22c"
+      },
+      {
+        "start": 1581252551198,
+        "status": "failed",
+        "stop": 1581252561963,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "6963dcd9-fd1a-4ac6-97f8-e9a5dc9deb4e"
+      },
+      {
+        "start": 1581295760887,
+        "status": "failed",
+        "stop": 1581295771668,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "87b54bd3-482c-43f5-b68f-e6677fb68eb4"
+      },
+      {
+        "start": 1581453037693,
+        "status": "failed",
+        "stop": 1581453048227,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "e6b590dd-2ccd-46af-87b7-a8ab2ced9850"
+      },
+      {
+        "start": 1581468609343,
+        "status": "failed",
+        "stop": 1581468620304,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "03b88de7-495b-4cc7-afff-b605442fce58"
+      },
+      {
+        "start": 1581554929487,
+        "status": "failed",
+        "stop": 1581554940536,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "bfc97ae3-e895-40de-af0b-1b0322351a81"
+      },
+      {
+        "start": 1581641502405,
+        "status": "failed",
+        "stop": 1581641513082,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "17277b90-759c-4cf4-9c91-f38f86d8a00c"
+      },
+      {
+        "start": 1581728149224,
+        "status": "failed",
+        "stop": 1581728160624,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "ad199dd8-b299-43d4-a3be-00521bfeb296"
+      },
+      {
+        "start": 1581814101836,
+        "status": "failed",
+        "stop": 1581814112818,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "035ba278-d84c-4d4a-9943-c2827de2ddca"
+      }
+    ]
+  },
+  "com.pck.test.TestClass2.test1": {
+    "failure_rate": 14,
+    "results": [
+      {
+        "start": 1580330034284,
+        "status": "passed",
+        "stop": 1580330042731,
+        "trace": null,
+        "uuid": "65c3cd73-0867-44a4-94d2-9526dd3aefb1"
+      },
+      {
+        "start": 1580349252816,
+        "status": "passed",
+        "stop": 1580349260932,
+        "trace": null,
+        "uuid": "2d927e81-a331-4582-baf7-386ce1e02a4c"
+      },
+      {
+        "start": 1580503920274,
+        "status": "passed",
+        "stop": 1580503928624,
+        "trace": null,
+        "uuid": "3572540e-87d1-44d3-aff9-3d13de2be3b3"
+      },
+      {
+        "start": 1580522168933,
+        "status": "passed",
+        "stop": 1580522177290,
+        "trace": null,
+        "uuid": "2af5fec2-96ec-4075-8def-7b90450ef726"
+      },
+      {
+        "start": 1580608262322,
+        "status": "passed",
+        "stop": 1580608270540,
+        "trace": null,
+        "uuid": "19022f4b-68aa-4d90-bf81-8ffe8da05ef3"
+      },
+      {
+        "start": 1580695187678,
+        "status": "passed",
+        "stop": 1580695196140,
+        "trace": null,
+        "uuid": "21a807e5-2d3c-4ff7-ab2b-aa3b4b9e06fe"
+      },
+      {
+        "start": 1580781318387,
+        "status": "passed",
+        "stop": 1580781326730,
+        "trace": null,
+        "uuid": "75c37b48-bb29-45c6-878a-db79a087eab6"
+      },
+      {
+        "start": 1580837887585,
+        "status": "passed",
+        "stop": 1580837896229,
+        "trace": null,
+        "uuid": "ccc22c31-f0f3-4fae-83df-243db68f8e05"
+      },
+      {
+        "start": 1580954511988,
+        "status": "broken",
+        "stop": 1580954528030,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "c3c25a7f-4bff-40a1-b139-7a542c39027f"
+      },
+      {
+        "start": 1581040667054,
+        "status": "passed",
+        "stop": 1581040675461,
+        "trace": null,
+        "uuid": "c900baf1-4ded-4a6f-bce7-61cccabc6d4d"
+      },
+      {
+        "start": 1581127909318,
+        "status": "passed",
+        "stop": 1581127917799,
+        "trace": null,
+        "uuid": "415d7bce-cd9e-43cc-96e6-ec5c4930724a"
+      },
+      {
+        "start": 1581214424812,
+        "status": "passed",
+        "stop": 1581214433292,
+        "trace": null,
+        "uuid": "300907f5-f53a-4d55-bc5a-c2edc97f4fc3"
+      },
+      {
+        "start": 1581257228060,
+        "status": "passed",
+        "stop": 1581257236441,
+        "trace": null,
+        "uuid": "77cface7-b3cd-486d-b426-2b2f883c6c8a"
+      },
+      {
+        "start": 1581300189861,
+        "status": "broken",
+        "stop": 1581300206099,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "347a030b-0916-4e1b-978c-0f52c2839f16"
+      },
+      {
+        "start": 1581457281738,
+        "status": "passed",
+        "stop": 1581457290157,
+        "trace": null,
+        "uuid": "22d6be74-27a5-4b44-b60b-e17b2c77e059"
+      },
+      {
+        "start": 1581473673427,
+        "status": "broken",
+        "stop": 1581473689293,
+        "trace": "org.openqa.selenium.UnhandledAlertException: unexpected alert open: {Alert text : }\n  (Session info: headless chrome=78.0.3904.108): \nBuild info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'\nSystem info: host: 'c1fa1eb932ed', ip: '172.17.0.3', os.name: 'Linux', os.arch: 'amd64', os.version: '4.14.138-114.102.amzn2.x86_64', java.version: '1.8.0_222'\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 78.0.3904.108, chrome: {chromedriverVersion: 78.0.3904.105 (60e2d8774a81..., userDataDir: /tmp/.com.google.Chrome.6HMBOR}, goog:chromeOptions: {debuggerAddress: localhost:44567}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}\nSession ID: b82d88465a0b0c7cb988521c1627cebd\n\tat org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:120)\n\tat org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)",
+        "uuid": "98f894df-0c2e-4bce-83f7-08cd1e6ebeea"
+      },
+      {
+        "start": 1581559206771,
+        "status": "passed",
+        "stop": 1581559215611,
+        "trace": null,
+        "uuid": "a05157ea-d427-433d-8230-4833d0b940fd"
+      },
+      {
+        "start": 1581645704846,
+        "status": "passed",
+        "stop": 1581645715588,
+        "trace": null,
+        "uuid": "71830875-c3a0-4395-8bb0-c89aea5d0a7f"
+      },
+      {
+        "start": 1581732591675,
+        "status": "passed",
+        "stop": 1581732600513,
+        "trace": null,
+        "uuid": "09e86e84-2a42-493e-9ed7-340026fb3d1b"
+      },
+      {
+        "start": 1581818874384,
+        "status": "passed",
+        "stop": 1581818883159,
+        "trace": null,
+        "uuid": "09fda88f-478f-4841-b75d-4a255f3bf120"
+      }
+    ]
+  },
+  "com.pck.test.TestClass3.test1": {
+    "failure_rate": 50,
+    "results": [
+      {
+        "start": 1580326628835,
+        "status": "passed",
+        "stop": 1580326644082,
+        "trace": null,
+        "uuid": "7f664f32-bf28-4431-b183-90e166620d12"
+      },
+      {
+        "start": 1580346123312,
+        "status": "passed",
+        "stop": 1580346138491,
+        "trace": null,
+        "uuid": "5c529b17-5cc4-4733-9033-9df58d473db1"
+      },
+      {
+        "start": 1580500899324,
+        "status": "passed",
+        "stop": 1580500914735,
+        "trace": null,
+        "uuid": "178ca81a-8866-4ec3-a07b-5354574b98ba"
+      },
+      {
+        "start": 1580519023984,
+        "status": "failed",
+        "stop": 1580519042372,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "15bd61a2-1705-4606-93d0-9b2dd46bb67e"
+      },
+      {
+        "start": 1580605291534,
+        "status": "passed",
+        "stop": 1580605309297,
+        "trace": null,
+        "uuid": "5206af1b-5339-4a27-a566-dfaea84d2ce3"
+      },
+      {
+        "start": 1580691715887,
+        "status": "failed",
+        "stop": 1580691732463,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "3f8c51b8-bc90-4e36-958d-3bfbddeb2072"
+      },
+      {
+        "start": 1580778214901,
+        "status": "failed",
+        "stop": 1580778233271,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "be52a699-a048-4830-9581-c1a93ec6b832"
+      },
+      {
+        "start": 1580834798212,
+        "status": "failed",
+        "stop": 1580834814526,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "366fead1-8e3c-4a12-8309-3c656e05bf16"
+      },
+      {
+        "start": 1580950922864,
+        "status": "failed",
+        "stop": 1580950938896,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "495b595e-d6ee-4433-88d7-66c6f374d86c"
+      },
+      {
+        "start": 1581037495159,
+        "status": "passed",
+        "stop": 1581037510518,
+        "trace": null,
+        "uuid": "ed2b9acd-73dd-4d17-9f72-06c48b0062d7"
+      },
+      {
+        "start": 1581124203767,
+        "status": "failed",
+        "stop": 1581124219681,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "f9ff18dd-027b-423a-b24a-3691df48a901"
+      },
+      {
+        "start": 1581210455216,
+        "status": "passed",
+        "stop": 1581210468160,
+        "trace": null,
+        "uuid": "e436ecb8-c90c-4853-92d1-65d7cca3d944"
+      },
+      {
+        "start": 1581253662554,
+        "status": "passed",
+        "stop": 1581253678143,
+        "trace": null,
+        "uuid": "8e4d7a90-4da8-4713-bea7-69ab789fba2c"
+      },
+      {
+        "start": 1581296871146,
+        "status": "passed",
+        "stop": 1581296888896,
+        "trace": null,
+        "uuid": "91a844df-e672-416a-89b2-e929cde2a016"
+      },
+      {
+        "start": 1581454187331,
+        "status": "failed",
+        "stop": 1581454205680,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "faa2e265-200b-43be-a386-1c13019d4902"
+      },
+      {
+        "start": 1581469802596,
+        "status": "failed",
+        "stop": 1581469818889,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "69bccba0-85c5-4ed0-963c-e16831c671ab"
+      },
+      {
+        "start": 1581556065157,
+        "status": "passed",
+        "stop": 1581556083147,
+        "trace": null,
+        "uuid": "3f4f07b4-1cfc-456c-83ac-608266f238bc"
+      },
+      {
+        "start": 1581642643712,
+        "status": "passed",
+        "stop": 1581642659585,
+        "trace": null,
+        "uuid": "a4ebefad-a05a-4c18-914a-a3e3850a3674"
+      },
+      {
+        "start": 1581729356205,
+        "status": "failed",
+        "stop": 1581729375431,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "0c75d0b3-1bcd-40fa-b697-c2a49b80ed98"
+      },
+      {
+        "start": 1581815249761,
+        "status": "failed",
+        "stop": 1581815265839,
+        "trace": "Exception: Custom error\n    at com.pck.test.demo.TestExample.test()",
+        "uuid": "53b7774e-3e1d-4e26-a7e9-200e184cc13c"
+      }
+    ]
+  }
+}
