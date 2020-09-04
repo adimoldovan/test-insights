@@ -1,89 +1,100 @@
-<html>
+<html lang="">
 
 <head>
-  <title>Insights</title>
-  <link rel="stylesheet" href="styles.css">
+    <title>Test insights</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <header>
+<header>
     <h2>Functional tests insights</h2>
     <h4>Generated on ${generated_date}</h4>
-  </header>
-  <div id="specs" style="overflow-x:auto;">
+</header>
+<div id="specs" style="overflow-x:auto;">
     <table>
-      <thead>
+        <thead>
         <tr>
-          <td colspan=3><input class="search" placeholder="Search" /></td>
+            <td colspan=3><label>
+                Search: <input class="search" placeholder="..."/>
+            </label></td>
         </tr>
         <tr>
-          <th class="sort" data-sort="name">Name <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 24 24" width="12"><path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg></th>
-          <th class="sort" data-sort="failure-rate">Failures <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 24 24" width="12"><path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg></th>
-          <th>Results</th>
+            <th class="sort" data-sort="name">Name
+                <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 24 24" width="12">
+                    <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/>
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                </svg>
+            </th>
+            <th class="sort" data-sort="failure-rate">Failures
+                <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 24 24" width="12">
+                    <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/>
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                </svg>
+            </th>
+            <th>Results</th>
         </tr>
-      </thead>
-      <tbody class="list">
+        </thead>
+        <tbody class="list">
         % for key in data:
         <tr class="result-row">
-          <%
+            <%
             segments = key.split('.')
             name = segments[segments.__len__() - 1]
             segments.pop(segments.__len__() - 1)
             [segments.pop(0) for n in range(0,4)]
             path = '.'.join(segments)
             %>
-          <td class="name"><span>${name}</span><br><small>${path}</small></td>
-          <td class="failure-rate">${data[key]['failure_rate']} %</td>
-          <td>
-            % for result in data[key]['results']:
-            <div class="tooltip status ${result['status']}">
-              <span class="upper">${result['status'][0]}</span>
-              <div id="details-${result['uuid']}" class="tooltiptext">
-                <%
-              import datetime
-              end = datetime.datetime.fromtimestamp(result['start']/1000).isoformat(timespec='seconds')
-              tdelta = datetime.datetime.fromtimestamp(result['stop']/1000) - datetime.datetime.fromtimestamp(result['start']/1000)
-              %>
-                <div class="clipboard">${end}, took ${tdelta}</div>
-                <div><span class="clipboard">Results id: ${result['uuid']}</span></div>
-                <hr>
-                <div class="stacktrace clipboard">${result['trace'] | h}</div>
-              </div>
-            </div>
-            % endfor
-          </td>
+            <td class="name"><span>${name}</span><br><small>${path}</small></td>
+            <td class="failure-rate">${data[key]['failure_rate']} %</td>
+            <td>
+                % for result in data[key]['results']:
+                <div class="tooltip status ${result['status']}">
+                    <span class="upper">${result['status'][0]}</span>
+                    <div id="details-${result['uuid']}" class="tooltiptext">
+                        <%
+                        import datetime
+                        end = datetime.datetime.fromtimestamp(result['start']/1000).isoformat(timespec='seconds')
+                        tdelta = datetime.datetime.fromtimestamp(result['stop']/1000) - datetime.datetime.fromtimestamp(result['start']/1000)
+                        %>
+                        <div class="clipboard">${end}, took ${tdelta}</div>
+                        <div><span class="clipboard">Results id: ${result['uuid']}</span></div>
+                        <hr>
+                        <div class="stacktrace clipboard">${result['trace'] | h}</div>
+                    </div>
+                </div>
+                % endfor
+            </td>
         </tr>
         % endfor
-      </tbody>
+        </tbody>
     </table>
-  </div>
-  <script>
-    var coll = document.getElementsByClassName("clipboard");
-    var i;
+</div>
+<script>
+    let coll = document.getElementsByClassName("clipboard");
+    let i;
 
     for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function() {
-        ta = document.createElement('textarea');
-        ta.value = this.innerText;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'absolute';
-        ta.style.left = '-9999px';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-      });
+        coll[i].addEventListener("click", function () {
+            ta = document.createElement('textarea');
+            ta.value = this.innerText;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'absolute';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+        });
     }
-  </script>
-  <script src="list.min.js"></script>
-  <script>
-  var options = {
-    valueNames: [ 'name', 'failure-rate']
-  };
+</script>
+<script src="list.min.js"></script>
+<script>
+    let options = {
+        valueNames: ['name', 'failure-rate']
+    };
 
-  // Init list
-  var contactList = new List('specs', options);
-  </script>
+    let specList = new List('specs', options);
+</script>
 </body>
 
 </html>

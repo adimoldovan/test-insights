@@ -1,3 +1,0 @@
-#/path/local/temp/results/
-s3://bucket/results/path
-s3://bucket/results/another_path

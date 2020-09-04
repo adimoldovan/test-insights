@@ -34,7 +34,7 @@ small {
 }
 
 .status {
-  border: 0px solid black;
+  border: 0 solid black;
   border-radius: 5px;
   padding: 10px;
   opacity: 0.8;
@@ -98,7 +98,7 @@ small {
 }
 
 .stacktrace {
-  font-family: Monospace;
+  font-family: Monospace, serif;
 }
 
 hr {
