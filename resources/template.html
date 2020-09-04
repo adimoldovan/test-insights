@@ -2,7 +2,143 @@
 
 <head>
     <title>Test insights</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        html {
+            font-family: sans-serif;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            color: #666666;
+        }
+
+        body {
+            margin: 0
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .result-row:hover {
+            background-color: #f5f5f5;
+        }
+
+        td {
+            border-bottom: 1px dotted #ddd;
+            padding: 15px;
+            font-weight: lighter;
+        }
+
+        small {
+            color: #999
+        }
+
+        .status {
+            border: 0 solid black;
+            border-radius: 5px;
+            padding: 10px;
+            opacity: 0.8;
+            float: left;
+            margin: 2px;
+            cursor: hand;
+            text-align: center;
+        }
+
+        .status:hover {
+            opacity: 1;
+        }
+
+        .passed {
+            color: white;
+            background-color: olivedrab;
+        }
+
+        .upper {
+            text-transform: uppercase;
+        }
+
+        .failed,
+        .broken {
+            color: white;
+            background-color: indianred;
+        }
+
+
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            width: 15px;
+        }
+
+        /* Tooltip text */
+        .tooltip .tooltiptext {
+            min-width: 450px;
+            visibility: hidden;
+            background-color: indianred;
+            color: #fff;
+            padding: 15px;
+            border-radius: 6px;
+
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            margin-left: -400px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltiptext {
+            text-align: left;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .stacktrace {
+            font-family: Monospace, serif;
+        }
+
+        hr {
+            border-top: 1px dotted red;
+        }
+
+        header {
+            border-bottom: 1px dotted #ddd;
+            padding: 15px;
+            background-color: #f5f5f5;
+
+        }
+
+        h2 {
+            font-weight: lighter;
+            text-transform: uppercase;
+        }
+
+        h4 {
+            font-weight: lighter;
+        }
+
+        input {
+            border: solid 1px #ccc;
+            border-radius: 5px;
+            padding: 7px 14px;
+            margin-bottom: 10px;
+            width: 450px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #aaa;
+        }
+    </style>
 </head>
 
 <body>
@@ -13,6 +149,16 @@
 <div id="specs" style="overflow-x:auto;">
     <table>
         <thead>
+        <tr>
+            <td colspan=3>
+                <ul>
+                    <li>Total test cases: ${data['meta']['test_cases']}</li>
+                    <li>Test cases with at least one failed run: ${data['meta']['failed_test_cases']}</li>
+                    <li>Total runs: ${data['meta']['total_runs']}</li>
+                    <li>Total failed runs: ${data['meta']['total_failed_runs']} (${data['meta']['failure_rate']})</li>
+                </ul>
+            </td>
+        </tr>
         <tr>
             <td colspan=3><label>
                 Search: <input class="search" placeholder="..."/>
@@ -35,7 +181,7 @@
         </tr>
         </thead>
         <tbody class="list">
-        % for key in data:
+        % for key in data['tests']:
         <tr class="result-row">
             <%
             segments = key.split('.')
@@ -45,16 +191,18 @@
             path = '.'.join(segments)
             %>
             <td class="name"><span>${name}</span><br><small>${path}</small></td>
-            <td class="failure-rate">${data[key]['failure_rate']} %</td>
+            <td class="failure-rate">${data['tests'][key]['failure_rate']} %</td>
             <td>
-                % for result in data[key]['results']:
+                % for result in data['tests'][key]['results']:
                 <div class="tooltip status ${result['status']}">
                     <span class="upper">${result['status'][0]}</span>
                     <div id="details-${result['uuid']}" class="tooltiptext">
                         <%
                         import datetime
                         end = datetime.datetime.fromtimestamp(result['start']/1000).isoformat(timespec='seconds')
-                        tdelta = datetime.datetime.fromtimestamp(result['stop']/1000) - datetime.datetime.fromtimestamp(result['start']/1000)
+                        stop = datetime.datetime.fromtimestamp(result['stop']/1000)
+                        start = datetime.datetime.fromtimestamp(result['start']/1000)
+                        tdelta = stop - start
                         %>
                         <div class="clipboard">${end}, took ${tdelta}</div>
                         <div><span class="clipboard">Results id: ${result['uuid']}</span></div>

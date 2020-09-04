@@ -15,7 +15,7 @@ class JSONReporterAllure:
         self.paths_list = paths_list
         self.output_results_file = output_results_file
         self.config = config
-        self.results = {}
+        self.results = {"meta": {}, "tests": {}}
         self.existing_uuids = []
         self.processed_files = 0
         self.skipped_results = 0
@@ -96,8 +96,8 @@ class JSONReporterAllure:
             return
 
         if (
-                json_data["status"] in ["broken", "failed"]
-                or json_data["fullName"] in self.results
+            json_data["status"] in ["broken", "failed"]
+            or json_data["fullName"] in self.results["tests"]
         ):
             result = Result(
                 json_data["status"],
@@ -107,12 +107,16 @@ class JSONReporterAllure:
                 json_data["statusDetails"].get("trace"),
             )
 
-            if json_data["fullName"] not in self.results:
-                self.results[json_data["fullName"]] = {"results": []}
+            if json_data["fullName"] not in self.results["tests"]:
+                self.results["tests"][json_data["fullName"]] = {"results": []}
 
             # print("Adding {0} result {1}".format(result.status, result.uuid))
-            self.results[json_data["fullName"]]["results"].append(result.__dict__)
-            self.results[json_data["fullName"]]["results"].sort(key=itemgetter("stop"))
+            self.results["tests"][json_data["fullName"]]["results"].append(
+                result.__dict__
+            )
+            self.results["tests"][json_data["fullName"]]["results"].sort(
+                key=itemgetter("stop")
+            )
             self.existing_uuids.append(result.uuid)
             action = "added"
             self.added_results += 1
@@ -135,13 +139,39 @@ class JSONReporterAllure:
             return partial_name in full_name
 
     def create_insights(self):
-        for test in self.results:
-            res = self.results[test]["results"]
+        # insights per test case
+        for test in self.results["tests"]:
+            res = self.results["tests"][test]["results"]
             status_list = [r["status"].lower() for r in res]
             failures = status_list.count("failed") + status_list.count("broken")
-            self.results[test]["failure_rate"] = int(
+            self.results["tests"][test]["failure_rate"] = int(
                 Decimal(failures / status_list.__len__()) * 100
             )
+            self.results["tests"][test]["runs"] = len(
+                self.results["tests"][test]["results"]
+            )
+            self.results["tests"][test]["failures"] = failures
+
+        # totals
+        self.results["meta"]["test_cases"] = len(self.results["tests"])
+        self.results["meta"]["failed_test_cases"] = sum(
+            1
+            for tc in self.results["tests"]
+            if self.results["tests"][tc]["failure_rate"] > 0
+        )
+        self.results["meta"]["total_runs"] = sum(
+            self.results["tests"][tc]["runs"] for tc in self.results["tests"]
+        )
+        self.results["meta"]["total_failed_runs"] = sum(
+            self.results["tests"][tc]["failures"] for tc in self.results["tests"]
+        )
+        self.results["meta"]["failure_rate"] = int(
+            Decimal(
+                self.results["meta"]["total_failed_runs"]
+                / self.results["meta"]["total_runs"]
+            )
+            * 100
+        )
 
     def create_aggregated_json(self):
         with open(self.output_results_file, "w") as file:
@@ -154,6 +184,6 @@ class JSONReporterAllure:
             with open(self.output_results_file, "r") as json_file:
                 self.results = json.load(json_file)
 
-        for test in self.results:
-            for result in self.results[test]["results"]:
+        for test in self.results["tests"]:
+            for result in self.results["tests"][test]["results"]:
                 self.existing_uuids.append(result["uuid"])

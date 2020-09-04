@@ -4,6 +4,7 @@ import shutil
 from datetime import datetime
 from pathlib import Path
 
+import htmlmin
 from mako.template import Template
 
 
@@ -30,8 +31,14 @@ class HTMLReporter:
             output = template.render(
                 data=results, generated_date=datetime.now().isoformat()
             )
-            # print(output)
-            html_file.write(output)
+            html_file.write(
+                htmlmin.minify(
+                    output,
+                    remove_comments=True,
+                    remove_empty_space=True,
+                    remove_all_empty_space=True,
+                )
+            )
 
         print()
         print("Report saved in {0}".format(self.html_report))
@@ -39,5 +46,5 @@ class HTMLReporter:
         # Move resources (css, js) with the HTML report
         output = Path(self.html_report).parent
 
-        for f in ["list.min.js", "styles.css"]:
+        for f in ["list.min.js"]:
             shutil.copy(os.path.join(self.resources_dir, f), os.path.join(output, f))
