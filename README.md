@@ -19,3 +19,8 @@ Source can be:
 
 ### Run
 - run the script: `pyton3 insights.py`
+
+## Credits
+
+- The report is generated using Mako template library: https://www.makotemplates.org
+- List.js http://listjs.com is used to filter and sort the results.
