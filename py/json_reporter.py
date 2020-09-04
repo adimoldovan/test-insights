@@ -7,7 +7,7 @@ from pathlib import Path
 
 import boto3
 
-from result import Result
+from py.result import Result
 
 
 class JSONReporterAllure:

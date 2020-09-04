@@ -1,7 +1,7 @@
 import json
 
-from html_reporter import HTMLReporter
-from json_reporter import JSONReporterAllure
+from py.html_reporter import HTMLReporter
+from py.json_reporter import JSONReporterAllure
 
 
 def generate_insights():
@@ -18,7 +18,7 @@ def generate_insights():
         paths = [line.strip() for line in f.readlines() if not line.startswith("#")]
 
     # If the source is Allure results
-    # JSONReporterAllure(paths, conf["output"]["json"], conf).report()
+    JSONReporterAllure(paths, conf["output"]["json"], conf).report()
 
     print()
     print("=========================================================")
