@@ -157,8 +157,10 @@
         <tr>
             <td colspan=3>
                 <ul>
-                    <li>Total test cases: ${data['meta']['test_cases']}</li>
+                    <li>Total affected test cases: ${data['meta']['affected_test_cases']}</li>
                     <li>Test cases with at least one failed run: ${data['meta']['failed_test_cases']}</li>
+                    <li>Solved test cases: ${data['meta']['solved_test_cases']}</li>
+                    <li>Solved results: ${data['meta']['solved_results']}</li>
                     <li>Total runs: ${data['meta']['total_runs']}</li>
                     <li>Total failed runs: ${data['meta']['total_failed_runs']} (${data['meta']['failure_rate']})</li>
                 </ul>

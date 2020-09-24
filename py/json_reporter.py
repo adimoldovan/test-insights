@@ -158,6 +158,7 @@ class JSONReporterAllure:
             res = self.results["tests"][test]["results"]
             status_list = [r["status"].lower() for r in res]
             failures = status_list.count("failed") + status_list.count("broken")
+            solved = status_list.count("solved")
             self.results["tests"][test]["failure_rate"] = int(
                 Decimal(failures / status_list.__len__()) * 100
             )
@@ -165,13 +166,18 @@ class JSONReporterAllure:
                 self.results["tests"][test]["results"]
             )
             self.results["tests"][test]["failures"] = failures
+            self.results["tests"][test]["solved"] = solved
 
         # totals
-        self.results["meta"]["test_cases"] = len(self.results["tests"])
+        self.results["meta"]["affected_test_cases"] = len(self.results["tests"])
         self.results["meta"]["failed_test_cases"] = sum(
             1
             for tc in self.results["tests"]
             if self.results["tests"][tc]["failure_rate"] > 0
+        )
+        self.results["meta"]["solved_test_cases"] = (
+            self.results["meta"]["affected_test_cases"]
+            - self.results["meta"]["failed_test_cases"]
         )
         self.results["meta"]["total_runs"] = sum(
             self.results["tests"][tc]["runs"] for tc in self.results["tests"]
@@ -185,6 +191,9 @@ class JSONReporterAllure:
                 / self.results["meta"]["total_runs"]
             )
             * 100
+        )
+        self.results["meta"]["solved_results"] = sum(
+            self.results["tests"][tc]["solved"] for tc in self.results["tests"]
         )
 
     def create_aggregated_json(self):
