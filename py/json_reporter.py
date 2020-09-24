@@ -1,9 +1,12 @@
+import datetime
 import json
+import os
 from decimal import Decimal
 from operator import itemgetter
 from os import listdir
 from os.path import isfile, join
 from pathlib import Path
+from shutil import copyfile
 
 import boto3
 
@@ -22,8 +25,19 @@ class JSONReporterAllure:
         self.added_results = 0
 
     def report(self):
-        # Create output dir
-        Path(Path(self.output_results_file).parent).mkdir(parents=True, exist_ok=True)
+        # backup existing report
+        f = Path(self.output_results_file)
+
+        if f.exists():
+            bkf_name = os.path.splitext(f.name)[0]
+            bkf = os.path.join(
+                f.parent, "{}-{}.json".format(bkf_name, datetime.datetime.now())
+            )
+            copyfile(f, bkf)
+            print("Created backup report: {}".format(bkf))
+
+        # Create output dir if report doesn't exist yet
+        Path(f.parent).mkdir(parents=True, exist_ok=True)
 
         self.get_existing_results()
         for path in self.paths_list:
