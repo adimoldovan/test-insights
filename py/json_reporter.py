@@ -198,7 +198,7 @@ class JSONReporterAllure:
 
     def create_aggregated_json(self):
         with open(self.output_results_file, "w") as file:
-            json.dump(self.results, file, indent=4, sort_keys=True)
+            json.dump(self.results, file, indent=2, sort_keys=True)
         print()
         print("Results saved in {0}".format(self.output_results_file))
 
