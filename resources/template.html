@@ -7,31 +7,66 @@
 
 <body>
 <header>
-    <h2>Functional tests insights</h2>
-    <h4>Generated on ${generated_date}</h4>
-</header>
-<table id="specs">
-    <thead>
-    <tr>
-        <td colspan=3>
-            <ul>
-                <li>Total affected test cases: ${data['meta']['affected_test_cases']}</li>
-                <li>Test cases with at least one failed run: ${data['meta']['failed_test_cases']}</li>
-                <li>Solved test cases: ${data['meta']['solved_test_cases']}</li>
-                <li>Solved results: ${data['meta']['solved_results']}</li>
-                <li>Total runs: ${data['meta']['total_runs']}</li>
-                <li>Total failed runs: ${data['meta']['total_failed_runs']} (${data['meta']['failure_rate']})</li>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td colspan=3><label>
-            Search: <input class="search" placeholder="..."/>
-        </label>
+    <div class="header-row flex">
+        <div class="header-card">
+            <h2>Functional tests insights <small>${generated_date}</small></h2>
+        </div>
+    </div>
+    <div class="header-row ">
+        <div class="header-card meta-item">
+            <div class="header-row meta-title">
+                Test cases
+            </div>
+            <div class="header-row">
+                <div class="header-card">
+                    <span class="meta-number ">${data['meta']['affected_test_cases']}</span>
+                    <span class="meta-label ">affected</span>
+                </div>
+                <div class="header-card">
+                    <span class="meta-number ">${data['meta']['failed_test_cases']}</span>
+                    <span class="meta-label ">with failures</span>
+                </div>
+                <div class="header-card">
+                    <span class="meta-number ">${data['meta']['solved_test_cases']}</span>
+                    <span class="meta-label ">solved</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-card meta-item">
+            <div class="header-row meta-title">
+                Results
+            </div>
+            <div class="header-row">
+                <div class="header-card">
+                    <span class="meta-number ">${data['meta']['total_runs']}</span>
+                    <span class="meta-label ">total</span>
+                </div>
+                <div class="header-card">
+                    <span class="meta-number ">${data['meta']['total_failed_runs']}</span>
+                    <span class="meta-label ">unresolved failures</span>
+                </div>
+                <div class="header-card">
+                    <span class="meta-number ">${data['meta']['solved_results']}</span>
+                    <span class="meta-label ">solved</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-row">
+        <div class="header-card">
+            <label>
+                Search: <input class="search" placeholder="search in name or stacktrace"/>
+            </label>
+        </div>
+        <div class="header-card">
             <input id="filterNoFailures" type="checkbox" checked/>
             <label for="filterNoFailures">Hide tests with 0% failure rate</label>
-        </td>
-    </tr>
+        </div>
+    </div>
+</header>
+
+<table id="specs">
+    <thead>
     <tr>
         <th class="sort" data-sort="name">Name
             <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 24 24" width="12">
@@ -60,7 +95,7 @@
         %>
         <td class="name"><span>${name}</span><br><small>${path}</small></td>
         <td class="failureRate">${data['tests'][key]['failure_rate']} %</td>
-        <td>
+        <td class="results">
             % for result in data['tests'][key]['results']:
             <div class="tooltip status ${result['status']}">
                 <span class="upper">${result['status'][0]}</span>

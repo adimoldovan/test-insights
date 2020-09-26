@@ -19,7 +19,7 @@ Array.from(clipboardCells).forEach(function (item) {
 
 // region define list options
 let options = {
-    valueNames: ['name', 'failureRate']
+    valueNames: ['name', 'failureRate', 'results']
 };
 
 let specList = new List('specs', options);
