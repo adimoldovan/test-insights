@@ -47,6 +47,7 @@ class JSONReporterAllure:
         for path in self.paths_list:
             self.add_results_from_path(path)
 
+        self.limit_test_runs()
         self.create_insights()
         self.create_aggregated_json()
 
@@ -168,23 +169,33 @@ class JSONReporterAllure:
             self.results["tests"][test]["failures"] = failures
             self.results["tests"][test]["solved"] = solved
 
-        # totals
+        # total affected test cases
         self.results["meta"]["affected_test_cases"] = len(self.results["tests"])
+
+        # total test cases with unresolved failures
         self.results["meta"]["failed_test_cases"] = sum(
             1
             for tc in self.results["tests"]
             if self.results["tests"][tc]["failure_rate"] > 0
         )
+
+        # total test cases will all failures solved
         self.results["meta"]["solved_test_cases"] = (
             self.results["meta"]["affected_test_cases"]
             - self.results["meta"]["failed_test_cases"]
         )
+
+        # total test runs
         self.results["meta"]["total_runs"] = sum(
             self.results["tests"][tc]["runs"] for tc in self.results["tests"]
         )
+
+        # total failed test runs
         self.results["meta"]["total_failed_runs"] = sum(
             self.results["tests"][tc]["failures"] for tc in self.results["tests"]
         )
+
+        # total failure rate
         self.results["meta"]["failure_rate"] = int(
             Decimal(
                 self.results["meta"]["total_failed_runs"]
@@ -192,9 +203,21 @@ class JSONReporterAllure:
             )
             * 100
         )
+
+        # total solved failures
         self.results["meta"]["solved_results"] = sum(
             self.results["tests"][tc]["solved"] for tc in self.results["tests"]
         )
+
+    def limit_test_runs(self):
+        keep = self.config["runs_limit"]
+        for test in self.results["tests"]:
+            runs = sorted(
+                self.results["tests"][test]["results"],
+                key=lambda result: result["start"],
+            )
+            del runs[: (len(runs) - keep)]
+            self.results["tests"][test]["results"] = runs
 
     def create_aggregated_json(self):
         with open(self.output_results_file, "w") as file:

@@ -1,4 +1,5 @@
 {
+  "runs_limit": 50,
   "input": "config/paths.txt",
   "output": {
     "json": "output/insights-report.json",
