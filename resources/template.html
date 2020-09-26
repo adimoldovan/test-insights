@@ -169,7 +169,10 @@
         <tr>
             <td colspan=3><label>
                 Search: <input class="search" placeholder="..."/>
-            </label></td>
+            </label>
+                <input id="filterNoFailures" type="checkbox" checked/>
+                <label for="filterNoFailures">Hide tests with 0% failure rate</label>
+            </td>
         </tr>
         <tr>
             <th class="sort" data-sort="name">Name
@@ -178,7 +181,7 @@
                     <path d="M0 0h24v24H0z" fill="none"/>
                 </svg>
             </th>
-            <th class="sort" data-sort="failure-rate">Failures
+            <th class="sort" data-sort="failureRate">Failure rate
                 <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 24 24" width="12">
                     <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/>
                     <path d="M0 0h24v24H0z" fill="none"/>
@@ -198,7 +201,7 @@
             path = '.'.join(segments)
             %>
             <td class="name"><span>${name}</span><br><small>${path}</small></td>
-            <td class="failure-rate">${data['tests'][key]['failure_rate']} %</td>
+            <td class="failureRate">${data['tests'][key]['failure_rate']} %</td>
             <td>
                 % for result in data['tests'][key]['results']:
                 <div class="tooltip status ${result['status']}">
@@ -245,10 +248,30 @@
 <script src="list.min.js"></script>
 <script>
     let options = {
-        valueNames: ['name', 'failure-rate']
+        valueNames: ['name', 'failureRate']
     };
 
     let specList = new List('specs', options);
+
+    let filterNoFailuresChkBx = document.getElementById("filterNoFailures")
+    filterNoFailuresChkBx.addEventListener('change', function () {
+        filterByFailuresRate()
+    });
+
+    specList.sort('failureRate', {order: "desc"});
+    filterByFailuresRate()
+
+    function filterByFailuresRate() {
+        specList.filter(function (item) {
+            let failureRate = parseInt(item.values()["failureRate"]);
+            if (filterNoFailuresChkBx.checked) {
+                return failureRate > 0;
+            } else {
+                return failureRate >= 0;
+            }
+        });
+    }
+
 </script>
 </body>
 
