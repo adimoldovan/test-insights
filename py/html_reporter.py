@@ -46,5 +46,5 @@ class HTMLReporter:
         # Move resources (css, js) with the HTML report
         output = Path(self.html_report).parent
 
-        for f in ["list.min.js"]:
+        for f in ["list.min.js", "insights.css", "insights.js"]:
             shutil.copy(os.path.join(self.resources_dir, f), os.path.join(output, f))
