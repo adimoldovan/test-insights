@@ -17,13 +17,12 @@ class HTMLReporter:
         self.html_report = self.output_results_file = os.path.join(
             config["output"]["dir"], config["output"]["html"]
         )
+        self.output_files = []
 
     def report(self):
         # Get the JSON report data
         with open(self.json_report, "r") as json_file:
             results = json.load(json_file)
-
-        print(os.getcwd())
 
         template = Template(filename=os.path.join(self.resources_dir, "template.html"))
 
@@ -44,11 +43,12 @@ class HTMLReporter:
                 )
             )
 
-        print()
-        print("Report saved in {0}".format(self.html_report))
+        self.output_files.append(self.html_report)
 
         # Move resources (css, js) with the HTML report
         output = Path(self.html_report).parent
 
         for f in ["list.min.js", "insights.css", "insights.js"]:
             shutil.copy(os.path.join(self.resources_dir, f), os.path.join(output, f))
+
+        return self.output_files

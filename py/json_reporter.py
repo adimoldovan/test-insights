@@ -29,6 +29,7 @@ class JSONReporterAllure:
         self.processed_files = 0
         self.skipped_results = 0
         self.added_results = 0
+        self.output_files = []
 
     def report(self):
         # backup existing report
@@ -40,7 +41,7 @@ class JSONReporterAllure:
                 f.parent, "{}-{}.json".format(bkf_name, datetime.datetime.now())
             )
             copyfile(f, bkf)
-            print("Created backup report: {}".format(bkf))
+            self.output_files.append(bkf)
 
         # Create output dir if report doesn't exist yet
         Path(f.parent).mkdir(parents=True, exist_ok=True)
@@ -56,6 +57,7 @@ class JSONReporterAllure:
         # self.limit_test_runs()
         self.create_insights()
         self.create_aggregated_json()
+        return self.output_files
 
     def add_results_from_s3(self, s3_path):
         s3 = boto3.resource("s3")
@@ -74,17 +76,13 @@ class JSONReporterAllure:
     def add_results_from_path(self, results_path):
         print()
         print(results_path)
-        print(
-            "------------------------------------------------------------------------------------------------------- "
-        )
+        print("-" * 95)
         print(
             "{:<50s}{:<15s}{:<15s}{:<15s}".format(
                 "", "Processed", "Added", "Skipped/Ignored"
             )
         )
-        print(
-            "------------------------------------------------------------------------------------------------------- "
-        )
+        print("-" * 95)
         if results_path.startswith("s3://"):
             self.add_results_from_s3(results_path)
         else:
@@ -95,9 +93,7 @@ class JSONReporterAllure:
                     with open(join(results_path, file), "r") as content:
                         self.add_result(content)
         print()
-        print(
-            "------------------------------------------------------------------------------------------------------- "
-        )
+        print("-" * 95)
 
     def add_result(self, result_content):
         json_data = json.load(result_content)
@@ -117,8 +113,8 @@ class JSONReporterAllure:
             return
 
         if (
-            json_data["status"] in ["broken", "failed"]
-            or json_data["fullName"] in self.results["tests"]
+                json_data["status"] in ["broken", "failed"]
+                or json_data["fullName"] in self.results["tests"]
         ):
             result = Result(
                 json_data["status"],
@@ -187,8 +183,8 @@ class JSONReporterAllure:
 
         # total test cases will all failures solved
         self.results["meta"]["solved_test_cases"] = (
-            self.results["meta"]["affected_test_cases"]
-            - self.results["meta"]["failed_test_cases"]
+                self.results["meta"]["affected_test_cases"]
+                - self.results["meta"]["failed_test_cases"]
         )
 
         # total test runs
@@ -228,8 +224,7 @@ class JSONReporterAllure:
     def create_aggregated_json(self):
         with open(self.output_results_file, "w") as file:
             json.dump(self.results, file, indent=2, sort_keys=True)
-        print()
-        print("Results saved in {0}".format(self.output_results_file))
+        self.output_files.append(self.output_results_file)
 
     def get_existing_results(self):
         if Path(self.output_results_file).is_file():

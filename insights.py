@@ -3,18 +3,16 @@ import json
 
 from py.html_reporter import HTMLReporter
 from py.json_reporter import JSONReporterAllure
+from py.utils import print_banner, print_separator
 
 
 def generate_insights():
-    print()
-    print("=========================================================")
-    print("Generating results json file")
-    print("=========================================================")
-    print()
+    print_banner("TEST INSIGHTS")
 
     # Get config from file
     conf = read_config()
     source_type = "allure"
+    output_files = []
 
     # parse arguments
     parser = argparse.ArgumentParser()
@@ -46,22 +44,26 @@ def generate_insights():
         print("Will use %s as source type" % args.source_type.lower())
         source_type = args.source_type.lower()
 
+    print_banner("Generating JSON report")
+
     if source_type == "allure":
-        JSONReporterAllure(conf).report()
+        output_files.extend(JSONReporterAllure(conf).report())
     elif source_type == "junit":
         raise ValueError("Junit source type is not yet implemented!")
     else:
         raise ValueError("%s is not a supported source type!" % source_type)
 
-    print()
-    print("=========================================================")
-    print("Generating HTML report")
-    print("=========================================================")
+    print_banner("Generating HTML report")
+
+    output_files.extend(HTMLReporter(conf).report())
+
+    print("Output:")
+    print("------")
+    for s in output_files:
+        print(s)
     print()
 
-    HTMLReporter(conf).report()
-
-    print("=========================================================")
+    print_separator()
 
 
 def read_config():
