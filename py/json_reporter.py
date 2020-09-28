@@ -113,8 +113,8 @@ class JSONReporterAllure:
             return
 
         if (
-                json_data["status"] in ["broken", "failed"]
-                or json_data["fullName"] in self.results["tests"]
+            json_data["status"] in ["broken", "failed"]
+            or json_data["fullName"] in self.results["tests"]
         ):
             result = Result(
                 json_data["status"],
@@ -183,8 +183,8 @@ class JSONReporterAllure:
 
         # total test cases will all failures solved
         self.results["meta"]["solved_test_cases"] = (
-                self.results["meta"]["affected_test_cases"]
-                - self.results["meta"]["failed_test_cases"]
+            self.results["meta"]["affected_test_cases"]
+            - self.results["meta"]["failed_test_cases"]
         )
 
         # total test runs

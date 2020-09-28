@@ -74,10 +74,7 @@ h4 {
 }
 
 #specs {
-}
-
-#specs {
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 table {
