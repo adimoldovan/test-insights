@@ -14,9 +14,15 @@ from py.result import Result
 
 
 class JSONReporterAllure:
-    def __init__(self, paths_list, output_results_file, config):
-        self.paths_list = paths_list
-        self.output_results_file = output_results_file
+    def __init__(self, config):
+        with open(config["input"], "r") as f:
+            self.paths_list = [
+                line.strip() for line in f.readlines() if not line.startswith("#")
+            ]
+
+        self.output_results_file = os.path.join(
+            config["output"]["dir"], config["output"]["json"]
+        )
         self.config = config
         self.results = {"meta": {}, "tests": {}}
         self.existing_uuids = []
@@ -47,7 +53,7 @@ class JSONReporterAllure:
         for path in self.paths_list:
             self.add_results_from_path(path)
 
-        self.limit_test_runs()
+        # self.limit_test_runs()
         self.create_insights()
         self.create_aggregated_json()
 
@@ -69,7 +75,7 @@ class JSONReporterAllure:
         print()
         print(results_path)
         print(
-            "-------------------------------------------------------------------------------------------------------"
+            "------------------------------------------------------------------------------------------------------- "
         )
         print(
             "{:<50s}{:<15s}{:<15s}{:<15s}".format(
@@ -77,7 +83,7 @@ class JSONReporterAllure:
             )
         )
         print(
-            "-------------------------------------------------------------------------------------------------------"
+            "------------------------------------------------------------------------------------------------------- "
         )
         if results_path.startswith("s3://"):
             self.add_results_from_s3(results_path)
@@ -90,7 +96,7 @@ class JSONReporterAllure:
                         self.add_result(content)
         print()
         print(
-            "-------------------------------------------------------------------------------------------------------"
+            "------------------------------------------------------------------------------------------------------- "
         )
 
     def add_result(self, result_content):

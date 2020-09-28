@@ -2,8 +2,9 @@
   "runs_limit": 50,
   "input": "config/paths.txt",
   "output": {
-    "json": "output/insights-report.json",
-    "html": "output/insights-report.html"
+    "dir": "output",
+    "json": "insights-report.json",
+    "html": "insights-report.html"
   },
   "ignore": [
     "com.pck.ignore.TestClass",

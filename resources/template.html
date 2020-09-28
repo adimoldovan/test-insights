@@ -6,119 +6,120 @@
 </head>
 
 <body>
-<header>
-    <div class="header-row flex">
-        <div class="header-card">
-            <h2>Functional tests insights <small>${generated_date}</small></h2>
-        </div>
-    </div>
-    <div class="header-row ">
-        <div class="header-card meta-item">
-            <div class="header-row meta-title">
-                Test cases
-            </div>
-            <div class="header-row">
-                <div class="header-card">
-                    <span class="meta-number ">${data['meta']['affected_test_cases']}</span>
-                    <span class="meta-label ">affected</span>
-                </div>
-                <div class="header-card">
-                    <span class="meta-number ">${data['meta']['failed_test_cases']}</span>
-                    <span class="meta-label ">with failures</span>
-                </div>
-                <div class="header-card">
-                    <span class="meta-number ">${data['meta']['solved_test_cases']}</span>
-                    <span class="meta-label ">solved</span>
-                </div>
+<div id="specs">
+    <header>
+        <div class="header-row flex">
+            <div class="header-card">
+                <h2>Functional tests insights <small>${generated_date}</small></h2>
             </div>
         </div>
-        <div class="header-card meta-item">
-            <div class="header-row meta-title">
-                Results
+        <div class="header-row ">
+            <div class="header-card meta-item">
+                <div class="header-row meta-title">
+                    Test cases
+                </div>
+                <div class="header-row">
+                    <div class="header-card">
+                        <span class="meta-number ">${data['meta']['affected_test_cases']}</span>
+                        <span class="meta-label ">affected</span>
+                    </div>
+                    <div class="header-card">
+                        <span class="meta-number ">${data['meta']['failed_test_cases']}</span>
+                        <span class="meta-label ">with failures</span>
+                    </div>
+                    <div class="header-card">
+                        <span class="meta-number ">${data['meta']['solved_test_cases']}</span>
+                        <span class="meta-label ">solved</span>
+                    </div>
+                </div>
             </div>
-            <div class="header-row">
-                <div class="header-card">
-                    <span class="meta-number ">${data['meta']['total_runs']}</span>
-                    <span class="meta-label ">total</span>
+            <div class="header-card meta-item">
+                <div class="header-row meta-title">
+                    Results
                 </div>
-                <div class="header-card">
-                    <span class="meta-number ">${data['meta']['total_failed_runs']}</span>
-                    <span class="meta-label ">unresolved failures</span>
-                </div>
-                <div class="header-card">
-                    <span class="meta-number ">${data['meta']['solved_results']}</span>
-                    <span class="meta-label ">solved</span>
+                <div class="header-row">
+                    <div class="header-card">
+                        <span class="meta-number ">${data['meta']['total_runs']}</span>
+                        <span class="meta-label ">total</span>
+                    </div>
+                    <div class="header-card">
+                        <span class="meta-number ">${data['meta']['total_failed_runs']}</span>
+                        <span class="meta-label ">unresolved failures</span>
+                    </div>
+                    <div class="header-card">
+                        <span class="meta-number ">${data['meta']['solved_results']}</span>
+                        <span class="meta-label ">solved</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="header-row">
-        <div class="header-card">
-            <label>
-                Search: <input class="search" placeholder="search in name or stacktrace"/>
-            </label>
-        </div>
-        <div class="header-card">
-            <input id="filterNoFailures" type="checkbox" checked/>
-            <label for="filterNoFailures">Hide tests with 0% failure rate</label>
-        </div>
-    </div>
-</header>
-
-<table id="specs">
-    <thead>
-    <tr>
-        <th class="sort" data-sort="name">Name
-            <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 24 24" width="12">
-                <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/>
-                <path d="M0 0h24v24H0z" fill="none"/>
-            </svg>
-        </th>
-        <th class="sort" data-sort="failureRate">Failure rate
-            <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 24 24" width="12">
-                <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/>
-                <path d="M0 0h24v24H0z" fill="none"/>
-            </svg>
-        </th>
-        <th>Results</th>
-    </tr>
-    </thead>
-    <tbody class="list">
-    % for key in data['tests']:
-    <tr class="result-row">
-        <%
-        segments = key.split('.')
-        name = segments[segments.__len__() - 1]
-        segments.pop(segments.__len__() - 1)
-        [segments.pop(0) for n in range(0,4)]
-        path = '.'.join(segments)
-        %>
-        <td class="name"><span>${name}</span><br><small>${path}</small></td>
-        <td class="failureRate">${data['tests'][key]['failure_rate']} %</td>
-        <td class="results">
-            % for result in data['tests'][key]['results']:
-            <div class="tooltip status ${result['status']}">
-                <span class="upper">${result['status'][0]}</span>
-                <div id="details-${result['uuid']}" class="tooltiptext">
-                    <%
-                    import datetime
-                    end = datetime.datetime.fromtimestamp(result['start']/1000).isoformat(timespec='seconds')
-                    stop = datetime.datetime.fromtimestamp(result['stop']/1000)
-                    start = datetime.datetime.fromtimestamp(result['start']/1000)
-                    tdelta = stop - start
-                    %>
-                    <div class="clipboard">${end}, took ${tdelta}</div>
-                    <div><span class="clipboard">Results id: ${result['uuid']}</span></div>
-                    <hr>
-                    <div class="stacktrace clipboard">${result['trace'] | h}</div>
-                </div>
+        <div class="header-row">
+            <div class="header-card">
+                <label>
+                    Search: <input class="search" placeholder="search in name or stacktrace"/>
+                </label>
             </div>
-            % endfor
-        </td>
-    </tr>
-    % endfor
-    </tbody>
-</table>
+            <div class="header-card">
+                <label for="filterNoFailures"><input id="filterNoFailures" type="checkbox" checked/> Hide tests with 0%
+                    failure rate</label>
+            </div>
+        </div>
+    </header>
+    <table>
+        <thead>
+        <tr>
+            <th class="sort" data-sort="name">Name
+                <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 24 24" width="12">
+                    <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/>
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                </svg>
+            </th>
+            <th class="sort" data-sort="failureRate">Failure rate
+                <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 24 24" width="12">
+                    <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/>
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                </svg>
+            </th>
+            <th>Results</th>
+        </tr>
+        </thead>
+        <tbody class="list">
+        % for key in data['tests']:
+        <tr class="result-row">
+            <%
+            segments = key.split('.')
+            name = segments[segments.__len__() - 1]
+            segments.pop(segments.__len__() - 1)
+            [segments.pop(0) for n in range(0,4)]
+            path = '.'.join(segments)
+            %>
+            <td class="name"><span>${name}</span><br><small>${path}</small></td>
+            <td class="failureRate">${data['tests'][key]['failure_rate']} %</td>
+            <td class="results">
+                % for result in data['tests'][key]['results']:
+                <div class="tooltip status ${result['status']}">
+                    <span class="upper">${result['status'][0]}</span>
+                    <div id="details-${result['uuid']}" class="tooltiptext">
+                        <%
+                        import datetime
+                        end = datetime.datetime.fromtimestamp(result['start']/1000).isoformat(timespec='seconds')
+                        stop = datetime.datetime.fromtimestamp(result['stop']/1000)
+                        start = datetime.datetime.fromtimestamp(result['start']/1000)
+                        tdelta = stop - start
+                        %>
+                        <div class="clipboard">${end}, took ${tdelta}</div>
+                        <div><span class="clipboard">Results id: ${result['uuid']}</span></div>
+                        <hr>
+                        <div class="stacktrace clipboard">${result['trace'] | h}</div>
+                    </div>
+                </div>
+                % endfor
+            </td>
+        </tr>
+        % endfor
+        </tbody>
+    </table>
+</div>
 <script src="list.min.js"></script>
 <script src="insights.js"></script>
 </body>

@@ -9,10 +9,14 @@ from mako.template import Template
 
 
 class HTMLReporter:
-    def __init__(self, json_report, resources_dir, html_report):
-        self.json_report = json_report
-        self.resources_dir = resources_dir
-        self.html_report = html_report
+    def __init__(self, config):
+        self.json_report = os.path.join(
+            config["output"]["dir"], config["output"]["json"]
+        )
+        self.resources_dir = "resources"
+        self.html_report = self.output_results_file = os.path.join(
+            config["output"]["dir"], config["output"]["html"]
+        )
 
     def report(self):
         # Get the JSON report data

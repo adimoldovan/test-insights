@@ -1,3 +1,4 @@
+import argparse
 import json
 
 from py.html_reporter import HTMLReporter
@@ -14,11 +15,34 @@ def generate_insights():
     # Get config from file
     conf = read_config()
 
-    with open(conf["input"], "r") as f:
-        paths = [line.strip() for line in f.readlines() if not line.startswith("#")]
+    # parse arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output_dir", help="output directory path")
+    parser.add_argument("--output_json", help="output json report file name")
+    parser.add_argument("--output_html", help="output html report file name")
+    parser.add_argument("--paths_file", help="path to file containing the source paths")
+    # parser.add_argument("--source", help="source type (Allure, Junit)")
+
+    args = parser.parse_args()
+
+    if args.output_dir:
+        print("Will write output to %s" % args.output_dir)
+        conf["output"]["dir"] = args.output_dir
+
+    if args.output_json:
+        print("Will save the JSON report as %s" % args.output_json)
+        conf["output"]["json"] = args.output_json
+
+    if args.output_html:
+        print("Will save the HTML report as %s" % args.output_html)
+        conf["output"]["html"] = args.output_html
+
+    if args.paths_file:
+        print("Will read results paths from %s" % args.paths_file)
+        conf["input"] = args.paths_file
 
     # If the source is Allure results
-    JSONReporterAllure(paths, conf["output"]["json"], conf).report()
+    JSONReporterAllure(conf).report()
 
     print()
     print("=========================================================")
@@ -26,7 +50,7 @@ def generate_insights():
     print("=========================================================")
     print()
 
-    HTMLReporter(conf["output"]["json"], "resources", conf["output"]["html"]).report()
+    HTMLReporter(conf).report()
 
     print("=========================================================")
 
