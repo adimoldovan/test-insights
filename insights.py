@@ -14,6 +14,7 @@ def generate_insights():
 
     # Get config from file
     conf = read_config()
+    source_type = "allure"
 
     # parse arguments
     parser = argparse.ArgumentParser()
@@ -21,7 +22,7 @@ def generate_insights():
     parser.add_argument("--output_json", help="output json report file name")
     parser.add_argument("--output_html", help="output html report file name")
     parser.add_argument("--paths_file", help="path to file containing the source paths")
-    # parser.add_argument("--source", help="source type (Allure, Junit)")
+    parser.add_argument("--source_type", help="source type (Allure, Junit)")
 
     args = parser.parse_args()
 
@@ -41,8 +42,16 @@ def generate_insights():
         print("Will read results paths from %s" % args.paths_file)
         conf["input"] = args.paths_file
 
-    # If the source is Allure results
-    JSONReporterAllure(conf).report()
+    if args.source_type:
+        print("Will use %s as source type" % args.source_type.lower())
+        source_type = args.source_type.lower()
+
+    if source_type == "allure":
+        JSONReporterAllure(conf).report()
+    elif source_type == "junit":
+        raise ValueError("Junit source type is not yet implemented!")
+    else:
+        raise ValueError("%s is not a supported source type!" % source_type)
 
     print()
     print("=========================================================")
