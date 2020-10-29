@@ -3,6 +3,7 @@ import json
 
 from py.html_reporter import HTMLReporter
 from py.json_reporter import JSONReporterAllure
+from py.report_processor import Processor
 from py.utils import print_banner, print_separator
 
 
@@ -21,6 +22,10 @@ def generate_insights():
     parser.add_argument("--output_html", help="output html report file name")
     parser.add_argument("--paths_file", help="path to file containing the source paths")
     parser.add_argument("--source_type", help="source type (Allure, Junit)")
+    parser.add_argument(
+        "--short_stacktrace",
+        help="try to reduce the number of line in stack traces. this will also update the existing results!",
+    )
 
     args = parser.parse_args()
 
@@ -44,6 +49,10 @@ def generate_insights():
         print("Will use %s as source type" % args.source_type.lower())
         source_type = args.source_type.lower()
 
+    if args.short_stacktrace:
+        print("Will use short stacktrace %s" % args.short_stacktrace.lower())
+        conf["short_stacktrace"] = bool(args.source_type.lower())
+
     print_banner("Generating JSON report")
 
     if source_type == "allure":
@@ -52,6 +61,8 @@ def generate_insights():
         raise ValueError("Junit source type is not yet implemented!")
     else:
         raise ValueError("%s is not a supported source type!" % source_type)
+
+    Processor(conf).report()
 
     print_banner("Generating HTML report")
 

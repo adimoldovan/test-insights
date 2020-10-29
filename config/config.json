@@ -1,5 +1,6 @@
 {
   "runs_limit": 50,
+  "short_stacktrace": true,
   "input": "config/paths.txt",
   "output": {
     "dir": "output",
