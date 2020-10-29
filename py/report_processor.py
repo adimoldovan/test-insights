@@ -31,6 +31,4 @@ class Processor:
         for test in self.results["tests"]:
             for result in self.results["tests"][test]["results"]:
                 if result["trace"] is not None:
-                    print("BEFORE: {}".format(result["trace"]))
                     result["trace"] = re.sub("\tat.*\n", "", result["trace"])
-                    print("AFTER: {}".format(result["trace"]))
