@@ -57,20 +57,19 @@ h4 {
 
 .meta-title {
     display: block;
-    font-weight: bolder;
     border-bottom: 1px solid #999999;
     margin-bottom: 2px;
+    font-size: 0.7em;
 }
 
 .meta-number {
-    display: block;
     font-weight: bold;
     font-size: large;
 }
 
 .meta-label {
-    display: block;
     font-size: small;
+    margin-left: 5px;
 }
 
 #specs {

@@ -16,18 +16,16 @@
         <div class="header-row ">
             <div class="header-card meta-item">
                 <div class="header-row meta-title">
-                    Test cases
+                    <h2>Test cases</h2>
                 </div>
                 <div class="header-row">
                     <div class="header-card">
                         <span class="meta-number ">${data['meta']['affected_test_cases']}</span>
-                        <span class="meta-label ">affected</span>
-                    </div>
-                    <div class="header-card">
+                        <span class="meta-label ">are affected (have at least 1 failure)</span>
+                        <br>
                         <span class="meta-number ">${data['meta']['failed_test_cases']}</span>
-                        <span class="meta-label ">with failures</span>
-                    </div>
-                    <div class="header-card">
+                        <span class="meta-label ">with unresolved failures</span>
+                        <br>
                         <span class="meta-number ">${data['meta']['solved_test_cases']}</span>
                         <span class="meta-label ">solved</span>
                     </div>
@@ -35,20 +33,18 @@
             </div>
             <div class="header-card meta-item">
                 <div class="header-row meta-title">
-                    Results
+                    <h2>Results</h2>
                 </div>
                 <div class="header-row">
                     <div class="header-card">
                         <span class="meta-number ">${data['meta']['total_runs']}</span>
-                        <span class="meta-label ">total</span>
-                    </div>
-                    <div class="header-card">
+                        <span class="meta-label ">total runs (only includes runs for tests with failures)</span>
+                        <br>
                         <span class="meta-number ">${data['meta']['total_failed_runs']}</span>
-                        <span class="meta-label ">unresolved failures</span>
-                    </div>
-                    <div class="header-card">
+                        <span class="meta-label "> unresolved failures</span>
+                        <br>
                         <span class="meta-number ">${data['meta']['solved_results']}</span>
-                        <span class="meta-label ">solved</span>
+                        <span class="meta-label ">results resolved</span>
                     </div>
                 </div>
             </div>
@@ -111,7 +107,9 @@
                         <div class="clipboard">${end}, took ${tdelta}</div>
                         <div><span class="clipboard">Results id: ${result['uuid']}</span></div>
                         <hr>
-                        <div class="stacktrace clipboard"><pre>${result['trace'] | h}</pre></div>
+                        <div class="stacktrace clipboard">
+                            <pre>${result['trace'] | h}</pre>
+                        </div>
                     </div>
                 </div>
                 % endfor
