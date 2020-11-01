@@ -1,3 +1,5 @@
+showLoader()
+
 // region clipboard
 let clipboardCells = document.getElementsByClassName("clipboard");
 
@@ -40,6 +42,11 @@ specList.sort('failureRate', {order: "desc"});
 filterByFailuresRate()
 // endregion
 
+// specs container padding
+setSpecsContainerPadding()
+
+hideLoader()
+
 /*
 * Filters listed test cases based in failure rate and the state of the control checkbox
 * Checkbox checked => filter out test cases with 0 failure rate
@@ -53,4 +60,25 @@ function filterByFailuresRate() {
             return failureRate >= 0;
         }
     });
+}
+
+function setSpecsContainerPadding() {
+    let headerHeight = document.getElementById("main-header").offsetHeight;
+    console.log(headerHeight)
+
+    let stickyTableCells = document.getElementsByClassName("tbl-header");
+
+    Array.from(stickyTableCells).forEach(function (cell) {
+        cell.style.top = "" + headerHeight
+    });
+}
+
+function showLoader() {
+    let loader = document.getElementById("loader")
+    loader.style.display = 'block';
+}
+
+function hideLoader() {
+    let loader = document.getElementById("loader")
+    loader.style.display = 'none';
 }
