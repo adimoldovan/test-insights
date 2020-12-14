@@ -17,7 +17,9 @@ class JSONReporterAllure:
     def __init__(self, config):
         with open(config["input"], "r") as f:
             self.paths_list = [
-                line.strip() for line in f.readlines() if not line.startswith("#")
+                line.strip()
+                for line in f.readlines()
+                if not line.startswith("#") and not line.isspace()
             ]
 
         self.output_results_file = os.path.join(
