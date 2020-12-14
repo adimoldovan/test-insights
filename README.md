@@ -17,8 +17,10 @@ Source can be:
 - you can update the script configuration by updating `config/config.json` 
 - add the source paths in `config/paths.txt`. They can be local paths or S3 buckets paths.
 
-### Run
-- run the script: `pyton3 insights.py`
+### Usage
+Run with default options: `pyton3 insights.py`
+
+Run `python insights.py --help` to see all available options.
 
 ## Credits
 
